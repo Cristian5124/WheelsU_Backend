@@ -155,6 +155,33 @@ public class ChatController {
     }
 
     /**
+     * Registrar clave pública del usuario
+     */
+    @PostMapping("/key")
+    public ResponseEntity<Map<String, Object>> registerPublicKey(@RequestBody Map<String, String> payload) {
+        String userId = payload.get("userId");
+        String publicKey = payload.get("publicKey");
+        
+        chatService.registerPublicKey(userId, publicKey);
+        
+        return ResponseEntity.ok(Map.of("success", true));
+    }
+
+    /**
+     * Obtener clave pública de un usuario
+     */
+    @GetMapping("/key/{userId}")
+    public ResponseEntity<Map<String, Object>> getPublicKey(@PathVariable String userId) {
+        String publicKey = chatService.getPublicKey(userId);
+        
+        if (publicKey != null) {
+            return ResponseEntity.ok(Map.of("success", true, "publicKey", publicKey));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("success", false, "message", "Key not found"));
+        }
+    }
+
+    /**
      * Marcar mensaje como leído
      */
     @PostMapping("/read/{messageId}")

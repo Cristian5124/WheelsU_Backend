@@ -1,6 +1,6 @@
 package com.fly.company.f4u_backend.model;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -22,8 +22,11 @@ public class ChatMessage {
     @Field("encrypted_content")
     private String encryptedContent;
 
+    @Field("encrypted_content_sender")
+    private String encryptedContentSender;
+
     @Field("timestamp")
-    private LocalDateTime timestamp;
+    private Instant timestamp;
 
     @Field("status")
     private String status = "SENT";
@@ -35,7 +38,7 @@ public class ChatMessage {
             this.id = UUID.randomUUID().toString();
         }
         if (this.timestamp == null) {
-            this.timestamp = LocalDateTime.now();
+            this.timestamp = Instant.now();
         }
     }
 
@@ -44,7 +47,7 @@ public class ChatMessage {
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.encryptedContent = encryptedContent;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = Instant.now();
         this.status = "SENT";
     }
 
@@ -81,11 +84,19 @@ public class ChatMessage {
         this.encryptedContent = encryptedContent;
     }
 
-    public LocalDateTime getTimestamp() {
+    public String getEncryptedContentSender() {
+        return encryptedContentSender;
+    }
+
+    public void setEncryptedContentSender(String encryptedContentSender) {
+        this.encryptedContentSender = encryptedContentSender;
+    }
+
+    public Instant getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
     }
 

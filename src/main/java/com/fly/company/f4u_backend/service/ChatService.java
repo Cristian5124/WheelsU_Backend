@@ -1,6 +1,8 @@
 package com.fly.company.f4u_backend.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,18 @@ public class ChatService {
 
     @Autowired
     private ChatMessageRepository chatMessageRepository;
+
+    // Almacenamiento en memoria de claves públicas (se pierde al reiniciar)
+    // En producción, esto debería ir en la base de datos (User collection)
+    private final Map<String, String> userPublicKeys = new ConcurrentHashMap<>();
+
+    public void registerPublicKey(String userId, String publicKey) {
+        userPublicKeys.put(userId, publicKey);
+    }
+
+    public String getPublicKey(String userId) {
+        return userPublicKeys.get(userId);
+    }
 
     /**
      * Guardar un nuevo mensaje en la base de datos
