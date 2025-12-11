@@ -12,7 +12,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                     "http://localhost:5173",
                     "http://localhost:5174",
-                    "https://delightful-tree-0a83b250f.1.azurestaticapps.net"
+                    "https://d34hoxniq2n0jw.cloudfront.net",
+                    "https://gentle-moss-0bc8bbe0f.3.azurestaticapps.net"
                 )
                 .allowedMethods("GET","POST","PUT","DELETE","OPTIONS","PATCH")
                 .allowedHeaders("*")
