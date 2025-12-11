@@ -1,22 +1,9 @@
 package com.fly.company.f4u_backend.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins(
-                    "http://localhost:5173",
-                    "http://localhost:5174",
-                    "https://d34hoxniq2n0jw.cloudfront.net",
-                    "https://gentle-moss-0bc8bbe0f.3.azurestaticapps.net"
-                )
-                .allowedMethods("GET","POST","PUT","DELETE","OPTIONS","PATCH")
-                .allowedHeaders("*")
-                .allowCredentials(true);
-    }
+    // CORS configuration is handled in SecurityConfig.java
 }

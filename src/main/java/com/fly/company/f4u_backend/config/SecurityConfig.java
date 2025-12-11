@@ -36,19 +36,22 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
+        // Allow specific origins
         configuration.setAllowedOrigins(Arrays.asList(
             "http://f4u-frontend-prod.s3-website.us-east-2.amazonaws.com",
             "https://d34hoxniq2n0jw.cloudfront.net",
             "http://localhost:5173",
             "https://gentle-moss-0bc8bbe0f.3.azurestaticapps.net"
         ));
-        configuration.setAllowedMethods(Arrays.asList(
-            "GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
-        ));
-        configuration.setAllowedHeaders(Arrays.asList(
-            "Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin",
-            "Access-Control-Request-Method", "Access-Control-Request-Headers"
-        ));
+        
+        // Also allow patterns to be safe (e.g. subdomains or slight variations)
+        // configuration.addAllowedOriginPattern("*"); // Use this if you want to allow all origins with credentials
+
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"));
+        
+        // Allow all headers to avoid preflight failures due to missing headers
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        
         configuration.setExposedHeaders(Arrays.asList(
             "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"
         ));
