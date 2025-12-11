@@ -41,7 +41,8 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList(
             "http://f4u-frontend-prod.s3-website.us-east-2.amazonaws.com",
             "https://d34hoxniq2n0jw.cloudfront.net",
-            "http://localhost:5173"
+            "http://localhost:5173",
+            "https://gentle-moss-0bc8bbe0f.3.azurestaticapps.net"
         ));
         configuration.setAllowedMethods(Arrays.asList(
             "GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
